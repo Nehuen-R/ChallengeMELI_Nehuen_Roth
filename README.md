@@ -45,7 +45,7 @@ El proyecto está desarrollado siguiendo **MVVM (Model-View-ViewModel)**, priori
 - **Frameworks:** SwiftUI (principal), Foundation, UIKit (mínimo)  
 - **Manejo de concurrencia:** `async/await`  
 - **Persistencia en memoria:** manejo de estado en ViewModels  
-- **Testing:** pruebas unitarias sobre servicios y viewmodels  
+- **Testing:** pruebas unitarias sobre servicios y ViewModels  
 
 ---
 
