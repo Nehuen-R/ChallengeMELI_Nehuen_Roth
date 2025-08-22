@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OSLog
 
 final class SearchServiceManager {
     func getSearchedData(url: URLEnum) async throws -> [Article] {

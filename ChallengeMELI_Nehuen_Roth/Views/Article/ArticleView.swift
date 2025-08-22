@@ -59,23 +59,35 @@ struct ArticleView: View {
                             .foregroundStyle(.gray)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
+                            .accessibilityInfo(label: "Fecha de publicación",
+                                               hint: "Muestra la fecha",
+                                               value: viewModel.getDate())
                         Spacer()
                         Text(viewModel.getAuthor())
                             .foregroundStyle(.gray)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
+                            .accessibilityInfo(label: "Autor del articulo",
+                                               hint: "Muestra el autor del articulo",
+                                               value: viewModel.getAuthor())
                     }
                     Text(viewModel.getTitle())
                         .foregroundStyle(colorScheme.textColor())
                         .font(.headline)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
+                        .accessibilityInfo(label: "Titulo del articulo",
+                                           hint: "Muestra el titulo del articulo",
+                                           value: viewModel.getTitle())
                     Text(viewModel.getSummary())
                         .foregroundStyle(colorScheme.textColor())
                         .font(.body)
                         .multilineTextAlignment(.leading)
                         .lineLimit(4)
                         .padding(.bottom, 8)
+                        .accessibilityInfo(label: "Descripción del articulo",
+                                           hint: "Muestra la descripción del articulo",
+                                           value: viewModel.getSummary())
                 }
                 .padding(.horizontal,  8)
             }

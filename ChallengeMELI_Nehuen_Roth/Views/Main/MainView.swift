@@ -43,12 +43,12 @@ struct MainView: View {
                 searchViewModel.search()
             }
             .submitLabel(.search)
-            .onChange(of: searchViewModel.searched, { oldValue, newValue in
+            .onChange(of: searchViewModel.searched) { newValue in
                 if newValue {
                     focusSearch = false
                     searchViewModel.search()
                 }
-            })
+            }
             .scrollDismissesKeyboard(.interactively)
         }
     }

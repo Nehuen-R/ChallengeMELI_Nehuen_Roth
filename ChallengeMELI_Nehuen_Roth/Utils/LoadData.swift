@@ -28,7 +28,7 @@ func loadData<T>(
     } catch {
         return .error(
             error: error,
-            errorString: "Error cargando \(url.error())",
+            errorString: url.error(),
             retry: retryAction
         )
     }

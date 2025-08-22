@@ -16,12 +16,16 @@ struct ErrorView: View {
     var body: some View {
         VStack {
             Spacer()
-            HStack {
-                Image(systemName: "xmark.circle")
-                    .foregroundStyle(.primary)
-                Text("Ocurrio un error inesperado\( errorString)")
-            }
+            Image(systemName: "xmark.circle")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .foregroundStyle(.primary)
+            Text(errorString)
+                .font(.title)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.leading)
             Text("Por favor intenta de nuevo mas tarde")
+                .font(.headline)
             if let retryAction {
                 Button(action:{
                     retryAction()
@@ -31,9 +35,9 @@ struct ErrorView: View {
                         .padding()
                         .background {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 5)
+                                RoundedRectangle(cornerRadius: 10)
                                     .fill(.gray.opacity(0.5))
-                                RoundedRectangle(cornerRadius: 5)
+                                RoundedRectangle(cornerRadius: 10)
                                     .fill(Material.thick)
                             }
                         }

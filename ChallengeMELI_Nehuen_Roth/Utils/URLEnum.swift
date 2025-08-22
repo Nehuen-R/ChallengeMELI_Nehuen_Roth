@@ -11,10 +11,6 @@ enum URLEnum: Equatable {
     case article
     case articleSearch(search: String)
     
-    static func == (lhs: URLEnum, rhs: URLEnum) -> Bool {
-        lhs == rhs
-    }
-    
     func url() -> String {
         switch self {
         case .article:
@@ -27,9 +23,9 @@ enum URLEnum: Equatable {
     func error() -> String {
         switch self {
         case .article:
-            "los Articulos"
+            "Error cargando los Articulos"
         case let .articleSearch(search):
-            search
+            "Error cargando información para la busqueda: '\(search)'"
         }
     }
     
