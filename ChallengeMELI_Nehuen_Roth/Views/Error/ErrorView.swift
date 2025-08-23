@@ -24,8 +24,10 @@ struct ErrorView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
+                .accessibilityInfo(label: "Error \(errorString)")
             Text("Por favor intenta de nuevo mas tarde")
                 .font(.headline)
+                .accessibilityInfo(label: "Por favor intenta de nuevo mas tarde")
             if let retryAction {
                 Button(action:{
                     retryAction()
@@ -42,6 +44,8 @@ struct ErrorView: View {
                             }
                         }
                 }
+                .accessibilityInfo(label: "Boton de reintentar",
+                                   hint: "Apretar dos veces para reintentar")
             }
             Spacer()
         }

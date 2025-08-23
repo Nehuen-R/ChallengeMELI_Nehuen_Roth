@@ -19,6 +19,7 @@ struct DetailView: View {
                     image
                         .resizable()
                         .scaledToFit()
+                        .accessibilityInfo(label: "Imagen de \(viewModel.getTitle())")
                 } placeholder: {
                     ProgressView()
                         .tint(.black)
@@ -31,18 +32,27 @@ struct DetailView: View {
                         .foregroundStyle(.gray)
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
+                        .accessibilityInfo(label: "Fecha de publicación \(viewModel.getDate())")
                     Spacer()
                     Text(viewModel.getAuthor())
                         .foregroundStyle(.gray)
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
+                        .accessibilityInfo(label: "Autor del articulo \(viewModel.getAuthor())")
                 }
                 Text(viewModel.getTitle())
                     .foregroundStyle(colorScheme.textColor())
                     .font(.headline)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
+                    .accessibilityInfo(label: "Titulo del articulo \(viewModel.getTitle())")
                 
+                Text(viewModel.getSummary())
+                    .foregroundStyle(colorScheme.textColor())
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 8)
+                    .accessibilityInfo(label: "Descripción del articulo \(viewModel.getSummary())")
                 //TODO: web content from url
                 
             }

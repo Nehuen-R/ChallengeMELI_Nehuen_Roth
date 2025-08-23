@@ -21,4 +21,8 @@ extension View {
         }
         return view
     }
+    
+    func shimmer(configuration: ShimmerConfiguration = .defaultConfiguration) -> some View {
+        modifier(ShimmerModifier(configuration: configuration))
+    }
 }

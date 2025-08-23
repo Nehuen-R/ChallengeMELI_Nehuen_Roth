@@ -36,7 +36,7 @@ struct SearchBarView: View {
                 }
                 .accessibilityInfo(label: "Barra de busqueda",
                                     hint: "Apretar para seleccionar la barra de bsuqueda",
-                                    value: "Se esta buscando \(viewModel.searchText)")
+                                   value: viewModel.valueForAccessibility())
             if focusSearch || viewModel.showCancelButton() {
                 Button(action:{
                     focusSearch = false
@@ -45,8 +45,7 @@ struct SearchBarView: View {
                     Text("Cancel")
                 }
                 .accessibilityInfo(label: "Cancelar la busqueda",
-                                   hint: "Apretar para cancelar la busqueda",
-                                   value: "Cancelar")
+                                   hint: "Apretar para cancelar la busqueda")
             }
         }
         .padding()
