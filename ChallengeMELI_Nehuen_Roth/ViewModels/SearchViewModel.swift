@@ -87,5 +87,10 @@ extension SearchViewModel {
             }
         }
     }
+    
+    func valueForAccessibility() -> String {
+        var searchTextAvoidSpaces = searchText.replacingOccurrences(of: " ", with: "")
+        return searchTextAvoidSpaces.isEmpty ? "No se esta buscando nada" : "Se esta buscando \(searchText)"
+    }
 }
 
