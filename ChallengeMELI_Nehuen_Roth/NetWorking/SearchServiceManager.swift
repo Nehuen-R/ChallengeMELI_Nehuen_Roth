@@ -7,9 +7,14 @@
 
 import Foundation
 
-final class SearchServiceManager {
+protocol SearchServiceManaging {
+    func getSearchedData(url: URLEnum) async throws -> [Article]
+}
+
+final class SearchServiceManager: SearchServiceManaging {
     func getSearchedData(url: URLEnum) async throws -> [Article] {
         let results = try await Networking.shared.apiGet(with: Results.self, url: url.url())
         return results.results
     }
 }
+

@@ -14,27 +14,34 @@ final class SearchViewModel: ObservableObject {
     @Published var searchedDataSave: [String] = []
     @Published var searched: Bool = false
     
-    private let searchServiceManager = SearchServiceManager()
+    private let searchServiceManager: SearchServiceManaging
     @Published var searchState: LoadState<[Article]> = .loading
+    
+    init(searchServiceManager: SearchServiceManaging = SearchServiceManager()) {
+        self.searchServiceManager = searchServiceManager
+    }
     
     var isSearching: Bool {
         searchText.isEmpty
     }
     
-    func getItemsBySearchText(searchText: String) {
+    func getItemsBySearchText(searchText: String) async {
         let url = URLEnum.articleSearch(search: searchText)
-        Task {
-            searchState = .loading
-            let state = await loadData(
-                request: { try await self.searchServiceManager.getSearchedData(url: url) },
-                emptyMessage: URLEnum.articleSearch(search: searchText).empty(),
-                url: url,
-                retryAction: { self.getItemsBySearchText(searchText: searchText) })
-            if case let .ready(data) = state {
-                self.searchData = data
-            }
+        searchState = .loading
+        let state = await loadData(
+            request: { try await self.searchServiceManager.getSearchedData(url: url) },
+            emptyMessage: URLEnum.articleSearch(search: searchText).empty(),
+            url: url,
+            retryAction: { Task { await self.getItemsBySearchText(searchText: searchText) } })
+        if case let .ready(data) = state {
+            self.searchData = data
+            searchState = .ready(data: data)
+            return
+        } else {
+            self.searchData = []
             searchState = state
         }
+        searchState = state
     }
 }
 
@@ -71,9 +78,8 @@ extension SearchViewModel {
         searchedDataSave.filter({ $0.lowercased().contains(searchText.lowercased())})
     }
     
-    func search() {
+    func search() async {
         searched = true
-        getItemsBySearchText(searchText: searchText)
         if searchedDataSave.contains(where: {
             $0.lowercased() == searchText.lowercased()
         }) {
@@ -86,6 +92,7 @@ extension SearchViewModel {
                 searchedDataSave.insert(searchText, at: 0)
             }
         }
+        Task { await getItemsBySearchText(searchText: searchText) }
     }
     
     func valueForAccessibility() -> String {

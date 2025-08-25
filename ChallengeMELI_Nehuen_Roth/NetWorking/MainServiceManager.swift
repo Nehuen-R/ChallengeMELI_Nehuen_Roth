@@ -7,8 +7,12 @@
 
 import Foundation
 
-final class MainServiceManager {
-    func getArticles(url: URLEnum = .article) async throws -> [Article] {
+protocol MainServiceManaging {
+    func getArticles(url: URLEnum) async throws -> [Article]
+}
+
+final class MainServiceManager: MainServiceManaging {
+    func getArticles(url: URLEnum) async throws -> [Article] {
         let results = try await Networking.shared.apiGet(with: Results.self, url: url.url())
         return results.results
     }

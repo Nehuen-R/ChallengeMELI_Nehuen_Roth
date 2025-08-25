@@ -40,13 +40,13 @@ struct MainView: View {
             })
             .onSubmit {
                 focusSearch = false
-                searchViewModel.search()
+                Task { await searchViewModel.search() }
             }
             .submitLabel(.search)
             .onChange(of: searchViewModel.searched) { newValue in
                 if newValue {
                     focusSearch = false
-                    searchViewModel.search()
+                    Task { await searchViewModel.search() }
                 }
             }
             .scrollDismissesKeyboard(.interactively)

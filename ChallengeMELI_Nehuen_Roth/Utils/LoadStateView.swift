@@ -39,9 +39,6 @@ struct LoadStateView<Item, Content>: View where Content: View, Item: Identifiabl
                     .foregroundColor(.red)
                     .padding()
             }
-        case .empty:
-            Text(emptyText)
-                .padding()
         case let .ready(items):
             LazyVStack {
                 ForEach(items, id: \.id) { item in

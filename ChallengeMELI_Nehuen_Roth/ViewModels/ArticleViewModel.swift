@@ -41,11 +41,16 @@ class ArticleViewModel: ObservableObject {
     }
     
     func loadImage() {
-        guard let url = URL(string: article.image_url) else {
+        var urlString = article.image_url
+        if article.image_url.hasPrefix("http://") {
+            urlString = urlString.replacingOccurrences(of: "http://", with: "https://")
+        }
+
+        guard let url = URL(string: urlString) else {
             hasError = true
             return
         }
-        
+
         isLoading = true
         ImageLoader.loadImage(from: url) { [weak self] image in
             guard let self = self else { return }
